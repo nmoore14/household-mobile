@@ -1,58 +1,49 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import LoginForm from '../pages/login/LoginForm';
+import CreateAccountForm from '../pages/login/CreateAccount';
+
 import { View, StyleSheet } from 'react-native';
-import { Text, TextInput, Button } from 'react-native-paper';
-import auth from '@react-native-firebase/auth'
 
+const Stack = createNativeStackNavigator();
+  
 export default function LoginScreen() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
-
-  const handleLogin = async () => {
-    try {
-      const response = await auth().signInWithEmailAndPassword(email, password);
-      console.log('User logged in:', response.user.uid);
-    } catch (e: any) {
-      setError(e.message);
-      console.error('Login error:', e.message);
-    }
-  }
-
   return (
-    <View style={ styles.container }>
-      <Text variant='displayMedium'>Welcome</Text>
-      <TextInput
-        mode='outlined'
-        label='Email'
-        value={ email }
-        onChangeText={ setEmail }
-        style={ styles.input }
-      />
-      <TextInput
-        mode='outlined'
-        label='Password'
-        value={ password }
-        onChangeText={ setPassword }
-        secureTextEntry
-        style={ styles.input }
-      />      
-      <Button mode='contained' onPress={handleLogin} style={styles.button}>
-        Login
-      </Button>
-      <Button mode='text' onPress={handleLogin} style={styles.button}>
-        Create Account
-      </Button>
-      {error && <Text style={styles.errorText}>{error}</Text>}
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Login" component={ LoginForm } />
+        <Stack.Screen name="Create Account" component={ CreateAccountForm } />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     paddingHorizontal: 20,
+    paddingVertical: 80,
+  },
+  socialContainer: {
+    position: 'absolute',
+    flex: 0,
+    width: 400,
+    height: 200,
+    bottom: 75,
+    left: 15,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingVertical: 20,
+    paddingHorizontal: 40,
+    borderRadius: 5,
+    borderStyle: 'solid',
+    borderColor: '#e6e6e6',
+    borderWidth: 2,
   },
   input: {
     marginBottom: 10,
@@ -60,6 +51,13 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 10,
     borderRadius: 5,
+  },
+  socialButton: {
+    marginTop: 10,
+    borderRadius: 5,
+    width: 200,
+    alignSelf: 'center',
+    backgroundColor: 'white',
   },
   errorText: {
     color: 'red',

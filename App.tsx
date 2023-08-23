@@ -35,7 +35,7 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer >
+    <NavigationContainer>
       <Tab.Navigator
         initialRouteName='House'
         screenOptions={({ route }) => ({
