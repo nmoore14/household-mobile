@@ -1,13 +1,27 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button, FAB, HelperText, Text, TextInput } from 'react-native-paper';
+import * as Font from 'expo-font';
+import { View, StyleSheet, Text } from 'react-native';
+import { Button, FAB, HelperText, TextInput } from 'react-native-paper';
 import auth from '@react-native-firebase/auth'
   
+let customFonts = {
+  'LeagueSpartan-Light': require('../../../assets/fonts/LeagueSpartan-Light.ttf'),
+  'LeagueSpartan-Regular': require('../../../assets/fonts/LeagueSpartan-Regular.ttf'),
+};
+
 export default function LoginForm({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState({ 'type': '', 'message': ''});
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+  
+  const _loadFontsAsync = async () => {
+    await Font.loadAsync(customFonts);
+    setFontsLoaded(true);
+  }
+
+  _loadFontsAsync();
 
   const handleLogin = async () => {
     try {
@@ -28,9 +42,17 @@ export default function LoginForm({ navigation }) {
     console.log('Logging in with Google');
   }
 
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <View style={ styles.container }>
-      <Text variant='displayMedium'>Welcome</Text>
+      <Text 
+        style={ styles.displayTextLarge }
+      >
+        Welcome
+      </Text>
       <TextInput
         mode='outlined'
         label='Email'
@@ -63,7 +85,7 @@ export default function LoginForm({ navigation }) {
         Create Account
       </Button>
       <View style={ styles.socialContainer }>
-        <Text variant='titleLarge'>Or Continue With...</Text>
+        <Text>Or Continue With...</Text>
         <FAB
           icon="google"
           label='Google'
@@ -81,6 +103,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     paddingHorizontal: 20,
     paddingVertical: 80,
+    backgroundColor: 'white',
   },
   socialContainer: {
     position: 'absolute',
@@ -100,6 +123,8 @@ const styles = StyleSheet.create({
   },
   input: {
     marginBottom: 10,
+    fontSize: 20,
+    backgroundColor: 'white',
   },
   button: {
     marginTop: 10,
@@ -116,4 +141,8 @@ const styles = StyleSheet.create({
     color: 'red',
     marginTop: 10,
   },
+  displayTextLarge: {
+    fontFamily: 'LeagueSpartan-Regular',
+    fontSize: 45,
+  }
 });
