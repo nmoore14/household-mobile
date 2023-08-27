@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as Font from 'expo-font';
 import { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -13,9 +14,22 @@ import SettingsScreen from './src/screens/SettingsScreen';
 
 const Tab = createBottomTabNavigator();
 
+let customFonts = {
+  'LeagueSpartan-Light': require('./assets/fonts/LeagueSpartan-Light.ttf'),
+  'LeagueSpartan-Regular': require('./assets/fonts/LeagueSpartan-Regular.ttf'),
+};
+
 export default function App() {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+  
+  const _loadFontsAsync = async () => {
+    await Font.loadAsync(customFonts);
+    setFontsLoaded(true);
+  }
+
+  _loadFontsAsync();
 
   function onAuthStateChanged(user: any) {
     setUser(user);
@@ -31,6 +45,10 @@ export default function App() {
     return (
       <LoginScreen />
     )
+  }
+
+  if (!fontsLoaded) {
+    return null;
   }
 
   return (

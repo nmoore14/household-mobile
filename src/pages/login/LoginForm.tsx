@@ -1,27 +1,16 @@
 import * as React from 'react';
 import { useState } from 'react';
-import * as Font from 'expo-font';
-import { View, StyleSheet, Text } from 'react-native';
-import { Button, FAB, HelperText, TextInput } from 'react-native-paper';
+import { Pressable, View, StyleSheet, Text } from 'react-native';
+import { FAB, HelperText, TextInput } from 'react-native-paper';
 import auth from '@react-native-firebase/auth'
-  
-let customFonts = {
-  'LeagueSpartan-Light': require('../../../assets/fonts/LeagueSpartan-Light.ttf'),
-  'LeagueSpartan-Regular': require('../../../assets/fonts/LeagueSpartan-Regular.ttf'),
-};
+
+import PrimaryButton from '../../elements/ui/buttons/PrimaryButton';
+import GhostButton from '../../elements/ui/buttons/GhostButton';
 
 export default function LoginForm({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState({ 'type': '', 'message': ''});
-  const [fontsLoaded, setFontsLoaded] = useState(false);
-  
-  const _loadFontsAsync = async () => {
-    await Font.loadAsync(customFonts);
-    setFontsLoaded(true);
-  }
-
-  _loadFontsAsync();
 
   const handleLogin = async () => {
     try {
@@ -42,56 +31,46 @@ export default function LoginForm({ navigation }) {
     console.log('Logging in with Google');
   }
 
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
     <View style={ styles.container }>
-      <Text 
-        style={ styles.displayTextLarge }
-      >
-        Welcome
-      </Text>
-      <TextInput
-        mode='outlined'
-        label='Email'
-        value={ email }
-        onChangeText={ setEmail }
-        style={ styles.input }
-      />
-      <HelperText type='error' visible={ error && error.type === 'email' }>
-        { error.message }
-      </HelperText>
-      <TextInput
-        mode='outlined'
-        label='Password'
-        value={ password }
-        onChangeText={ setPassword }
-        secureTextEntry
-        style={ styles.input }
-      />
-      <HelperText type='error' visible={ error && error.type === 'password' }>
-        { error.message }
-      </HelperText>
-      <Button mode='contained' onPress={handleLogin} style={styles.button}>
-        Login
-      </Button>
-      <Button 
-        mode='text' 
-        onPress={ () => navigation.navigate('Create Account')} 
-        style={styles.button}
-      >
-        Create Account
-      </Button>
-      <View style={ styles.socialContainer }>
-        <Text>Or Continue With...</Text>
-        <FAB
-          icon="google"
-          label='Google'
-          onPress={ handleGoogleLogin }
-          style={ styles.socialButton }
+      <View style={ styles.formContainer }>
+        <Text 
+          style={ styles.displayTextLarge }
+        >
+          Welcome
+        </Text>
+        <TextInput
+          mode='outlined'
+          label='Email'
+          value={ email }
+          onChangeText={ setEmail }
+          style={ styles.input }
         />
+        <HelperText type='error' visible={ error && error.type === 'email' }>
+          { error.message }
+        </HelperText>
+        <TextInput
+          mode='outlined'
+          label='Password'
+          value={ password }
+          onChangeText={ setPassword }
+          secureTextEntry
+          style={ styles.input }
+        />
+        <HelperText type='error' visible={ error && error.type === 'password' }>
+          { error.message }
+        </HelperText>
+        <PrimaryButton title='Login' action={ handleLogin } />
+        <GhostButton title='Create Account' action={ () => navigation.navigate('Create Account') } />
+        <View style={ styles.socialContainer }>
+          <Text>Or Continue With...</Text>
+          <FAB
+            icon="google"
+            label='Google'
+            onPress={ handleGoogleLogin }
+            style={ styles.socialButton }
+          />
+        </View>
       </View>
     </View>
   )
@@ -100,35 +79,43 @@ export default function LoginForm({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'flex-end',
+    backgroundColor: '#ebeef3',
+  },
+  formContainer: {
+    position: 'absolute',
+    width: '100%',
+    flex: 0,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
     justifyContent: 'flex-start',
-    paddingHorizontal: 20,
-    paddingVertical: 80,
     backgroundColor: 'white',
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 25,
   },
   socialContainer: {
-    position: 'absolute',
     flex: 0,
-    width: 400,
-    height: 200,
-    bottom: 75,
-    left: 15,
+    width: 350,
+    height: 150,
+    marginTop: 10,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingVertical: 20,
-    paddingHorizontal: 40,
+    alignSelf: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     borderRadius: 5,
     borderStyle: 'solid',
     borderColor: '#e6e6e6',
     borderWidth: 2,
   },
   input: {
-    marginBottom: 10,
-    fontSize: 20,
+    fontFamily: 'LeagueSpartan-Light',
+    fontSize: 18,
     backgroundColor: 'white',
-  },
-  button: {
-    marginTop: 10,
-    borderRadius: 5,
   },
   socialButton: {
     marginTop: 10,
@@ -144,5 +131,6 @@ const styles = StyleSheet.create({
   displayTextLarge: {
     fontFamily: 'LeagueSpartan-Regular',
     fontSize: 45,
+    textAlign: 'center',
   }
 });
