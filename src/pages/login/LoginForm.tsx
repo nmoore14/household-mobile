@@ -88,8 +88,6 @@ const styles = StyleSheet.create({
     flex: 0,
     paddingVertical: 20,
     paddingHorizontal: 10,
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
     justifyContent: 'flex-start',
     backgroundColor: 'white',
     shadowColor: 'black',
