@@ -11,7 +11,11 @@ export default function LoginScreen() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Login" component={ LoginForm } />
+        <Stack.Screen 
+          name="Login" 
+          component={ LoginForm } 
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="Create Account" component={ CreateAccountForm } />
       </Stack.Navigator>
     </NavigationContainer>

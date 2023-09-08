@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
   formContainer: {
     position: 'absolute',
     width: '100%',
+    height: '75%',
     flex: 0,
     paddingVertical: 20,
     paddingHorizontal: 10,
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
     flex: 0,
     width: 350,
     height: 150,
-    marginTop: 10,
+    marginTop: 50,
     justifyContent: 'flex-start',
     alignItems: 'center',
     alignSelf: 'center',
