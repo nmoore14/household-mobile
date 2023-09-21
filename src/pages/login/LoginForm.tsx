@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Pressable, View, StyleSheet, Text } from 'react-native';
+import { Pressable, View, StyleSheet, Text, Image } from 'react-native';
 import { FAB, HelperText, TextInput } from 'react-native-paper';
 import auth from '@react-native-firebase/auth'
 
 import PrimaryButton from '../../elements/ui/buttons/PrimaryButton';
 import GhostButton from '../../elements/ui/buttons/GhostButton';
 
-export default function LoginForm({ navigation }) {
+export default function LoginForm({ navigation }:any) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState({ 'type': '', 'message': ''});
@@ -33,6 +33,15 @@ export default function LoginForm({ navigation }) {
 
   return (
     <View style={ styles.container }>
+      <View style={ styles.logoContainer }>
+        <Image 
+          source={require('../../elements/icons/hh-light.png')}
+          style={ styles.logoImage }
+        />
+        <Text style={ styles.logoText }>
+          House Hold
+        </Text>
+      </View>
       <View style={ styles.formContainer }>
         <Text 
           style={ styles.displayTextLarge }
@@ -71,6 +80,9 @@ export default function LoginForm({ navigation }) {
             style={ styles.socialButton }
           />
         </View>
+        <Text style={ styles.cpText }>
+          ©Nick Moore 2023
+        </Text>
       </View>
     </View>
   )
@@ -82,6 +94,27 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     backgroundColor: '#ebeef3',
   },
+  logoContainer: {
+    position: 'absolute',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'baseline',
+    width: '100%',
+    height: 150,
+    top: 100,
+    left: 0,
+  },
+  logoImage: {
+    width: 90,
+    height: 90,
+  },
+  logoText: {
+    fontFamily: 'LeagueSpartan-Regular',
+    fontSize: 45,
+    textAlign: 'center',
+    marginLeft: 10,
+  },
   formContainer: {
     position: 'absolute',
     width: '100%',
@@ -92,9 +125,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     backgroundColor: 'white',
     shadowColor: 'black',
-    shadowOffset: { width: 0, height: -4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 25,
+    shadowOffset: { width: 0, height: -20 },
+    shadowOpacity: 0.15,
+    shadowRadius: 50,
   },
   socialContainer: {
     flex: 0,
@@ -129,7 +162,15 @@ const styles = StyleSheet.create({
   },
   displayTextLarge: {
     fontFamily: 'LeagueSpartan-Regular',
-    fontSize: 45,
+    fontSize: 35,
     textAlign: 'center',
+    marginTop: 30,
+  },
+  cpText: {
+    position: 'absolute',
+    width: '100%',
+    textAlign: 'center',
+    bottom: 20,
+    color: '#bdbdbd',
   }
 });
