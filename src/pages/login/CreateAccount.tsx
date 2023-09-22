@@ -44,32 +44,42 @@ const CreateAccountForm: React.FC<CreateAccountProps> = ({ onSubmit }) => {
           Username
         </Text>
         <TextInput
-          placeholder="username"
+          placeholder="Think of a username..."
           value={formData.username}
           onChangeText={(value) => handleInputChange('username', value)}
           style={styles.input}
         />
       </View>
       <View style={ styles.nameContainer }>
-        <TextInput
-          placeholder="First Name"
-          value={formData.firstName}
-          onChangeText={(value) => handleInputChange('firstName', value)}
-          style={styles.nameInput}
-        />
-        <TextInput
-          placeholder="Last Name"
-          value={formData.lastName}
-          onChangeText={(value) => handleInputChange('lastName', value)}
-          style={styles.nameInput}
-        />
+        <View style={ styles.userNameInput }>
+          <Text style={ styles.userNameLabel }>
+            First Name
+          </Text>
+          <TextInput
+            placeholder="First Name"
+            value={formData.firstName}
+            onChangeText={(value) => handleInputChange('firstName', value)}
+            style={styles.nameInput}
+          />
+        </View>
+        <View style={ styles.userNameInput }>
+          <Text style={ styles.userNameLabel }>
+            Last Name
+          </Text>
+          <TextInput
+            placeholder="Last Name"
+            value={formData.lastName}
+            onChangeText={(value) => handleInputChange('lastName', value)}
+            style={styles.nameInput}
+          />
+        </View>
       </View>
       <View style={ styles.userInput }>
         <Text style={ styles.inputLabel }>
           Email
         </Text>
         <TextInput
-          placeholder="Email"
+          placeholder="Enter your email..."
           value={formData.email}
           onChangeText={(value) => handleInputChange('email', value)}
           style={styles.input}
@@ -80,7 +90,7 @@ const CreateAccountForm: React.FC<CreateAccountProps> = ({ onSubmit }) => {
           Password
         </Text>
         <TextInput
-          placeholder="Password"
+          placeholder="Enter a password..."
           value={formData.password}
           onChangeText={(value) => handleInputChange('password', value)}
           secureTextEntry
@@ -132,10 +142,18 @@ const styles = StyleSheet.create({
     borderColor: '#bdbdbd',
     borderRadius: 15,
   },
+  userNameInput: {
+    width: '45%',
+  },
+  userNameLabel: {
+    fontFamily: 'LeagueSpartan-Regular',
+    fontSize: 18,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+  },
   nameInput: {
     fontFamily: 'LeagueSpartan-Light',
     fontSize: 24,
-    width: '45%',
     paddingVertical: 15,
     paddingHorizontal: 20,
     backgroundColor: 'white',

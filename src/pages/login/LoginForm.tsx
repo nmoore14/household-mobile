@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Pressable, View, StyleSheet, Text, Image } from 'react-native';
-import { FAB, HelperText, TextInput } from 'react-native-paper';
+import { Pressable, View, StyleSheet, Text, TextInput, Image } from 'react-native';
+import { FAB, HelperText } from 'react-native-paper';
 import auth from '@react-native-firebase/auth'
 
 import PrimaryButton from '../../elements/ui/buttons/PrimaryButton';
@@ -48,27 +48,35 @@ export default function LoginForm({ navigation }:any) {
         >
           Welcome
         </Text>
-        <TextInput
-          mode='outlined'
-          label='Email'
-          value={ email }
-          onChangeText={ setEmail }
-          style={ styles.input }
-        />
-        <HelperText type='error' visible={ error && error.type === 'email' }>
-          { error.message }
-        </HelperText>
-        <TextInput
-          mode='outlined'
-          label='Password'
-          value={ password }
-          onChangeText={ setPassword }
-          secureTextEntry
-          style={ styles.input }
-        />
-        <HelperText type='error' visible={ error && error.type === 'password' }>
-          { error.message }
-        </HelperText>
+        <View style={ styles.userInput }>
+          <Text style={ styles.inputLabel }>
+            Email
+          </Text>
+          <TextInput
+            placeholder='Enter your email'
+            value={ email }
+            onChangeText={ setEmail }
+            style={ styles.input }
+          />
+          <HelperText type='error' visible={ error && error.type === 'email' }>
+            { error.message }
+          </HelperText>
+        </View>
+        <View style={ styles.userInput }>
+          <Text style={ styles.inputLabel }>
+            Password
+          </Text>
+          <TextInput
+            placeholder='Enter your password'
+            value={ password }
+            onChangeText={ setPassword }
+            secureTextEntry
+            style={ styles.input }
+          />
+          <HelperText type='error' visible={ error && error.type === 'password' }>
+            { error.message }
+          </HelperText>
+        </View>
         <PrimaryButton title='Login' action={ handleLogin } />
         <GhostButton title='Create Account' action={ () => navigation.navigate('Create Account') } />
         <View style={ styles.socialContainer }>
@@ -129,6 +137,26 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 50,
   },
+  userInput: {
+    width: '100%',
+  },
+  inputLabel: {
+    fontFamily: 'LeagueSpartan-Regular',
+    fontSize: 18,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+  },
+  input: {
+    fontFamily: 'LeagueSpartan-Light',
+    fontSize: 24,
+    width: '100%',
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    backgroundColor: 'white',
+    borderWidth: 2,
+    borderColor: '#bdbdbd',
+    borderRadius: 15,
+  },
   socialContainer: {
     flex: 0,
     width: 350,
@@ -143,11 +171,6 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderColor: '#e6e6e6',
     borderWidth: 2,
-  },
-  input: {
-    fontFamily: 'LeagueSpartan-Light',
-    fontSize: 18,
-    backgroundColor: 'white',
   },
   socialButton: {
     marginTop: 10,
