@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper';
 
+import UserTextInput from '../../elements/ui/inputs/UserTextInput'; 
 import PrimaryButton from '../../elements/ui/buttons/PrimaryButton';
 
 interface CreateAccountProps {
@@ -39,64 +39,53 @@ const CreateAccountForm: React.FC<CreateAccountProps> = ({ onSubmit }) => {
 
   return (
     <View style={ styles.container }>
-      <View style={ styles.userInput }>
-        <Text style={ styles.inputLabel }>
-          Username
-        </Text>
-        <TextInput
-          placeholder="Think of a username..."
-          value={formData.username}
-          onChangeText={(value) => handleInputChange('username', value)}
-          style={styles.input}
-        />
-      </View>
+      <UserTextInput 
+        label='Username'
+        placeholder='Think of a username...'
+        fullWidth={ true }
+        inputValue={ formData.username }
+        onChangeKey='username'
+        onChange={ handleInputChange }
+        needSecureEntry={ false }
+      />
       <View style={ styles.nameContainer }>
-        <View style={ styles.userNameInput }>
-          <Text style={ styles.userNameLabel }>
-            First Name
-          </Text>
-          <TextInput
-            placeholder="First Name"
-            value={formData.firstName}
-            onChangeText={(value) => handleInputChange('firstName', value)}
-            style={styles.nameInput}
-          />
-        </View>
-        <View style={ styles.userNameInput }>
-          <Text style={ styles.userNameLabel }>
-            Last Name
-          </Text>
-          <TextInput
-            placeholder="Last Name"
-            value={formData.lastName}
-            onChangeText={(value) => handleInputChange('lastName', value)}
-            style={styles.nameInput}
-          />
-        </View>
-      </View>
-      <View style={ styles.userInput }>
-        <Text style={ styles.inputLabel }>
-          Email
-        </Text>
-        <TextInput
-          placeholder="Enter your email..."
-          value={formData.email}
-          onChangeText={(value) => handleInputChange('email', value)}
-          style={styles.input}
+        <UserTextInput 
+          label='First Name'
+          placeholder='First Name'
+          fullWidth={ false }
+          inputValue={ formData.firstName }
+          onChangeKey='firstName'
+          onChange={ handleInputChange }
+          needSecureEntry={ false }
+        />
+        <UserTextInput 
+          label='First Name'
+          placeholder='First Name'
+          fullWidth={ false }
+          inputValue={ formData.firstName }
+          onChangeKey='firstName'
+          onChange={ handleInputChange }
+          needSecureEntry={ false }
         />
       </View>
-      <View style={ styles.userInput }>
-        <Text style={ styles.inputLabel }>
-          Password
-        </Text>
-        <TextInput
-          placeholder="Enter a password..."
-          value={formData.password}
-          onChangeText={(value) => handleInputChange('password', value)}
-          secureTextEntry
-          style={styles.input}
-        />
-      </View>
+      <UserTextInput 
+        label='Email' 
+        placeholder='Enter your email...'
+        fullWidth={ true }
+        inputValue={ formData.email }
+        onChangeKey='email'
+        onChange={ handleInputChange }
+        needSecureEntry={ false }
+      />
+      <UserTextInput 
+        label='Password' 
+        placeholder='Enter a password...'
+        fullWidth={ true }
+        inputValue={ formData.password }
+        onChangeKey='password'
+        onChange={ handleInputChange }
+        needSecureEntry={ true }
+      />
       <PrimaryButton title='Create Account' action={ handleSubmit }/>
     </View>
   );
@@ -121,45 +110,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-  },
-  userInput: {
-    width: '100%',
-  },
-  inputLabel: {
-    fontFamily: 'LeagueSpartan-Regular',
-    fontSize: 18,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-  },
-  input: {
-    fontFamily: 'LeagueSpartan-Light',
-    fontSize: 24,
-    width: '100%',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    backgroundColor: 'white',
-    borderWidth: 2,
-    borderColor: '#bdbdbd',
-    borderRadius: 15,
-  },
-  userNameInput: {
-    width: '45%',
-  },
-  userNameLabel: {
-    fontFamily: 'LeagueSpartan-Regular',
-    fontSize: 18,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-  },
-  nameInput: {
-    fontFamily: 'LeagueSpartan-Light',
-    fontSize: 24,
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    backgroundColor: 'white',
-    borderWidth: 2,
-    borderColor: '#bdbdbd',
-    borderRadius: 15,
   },
   button: {
     marginTop: 10,

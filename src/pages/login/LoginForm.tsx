@@ -15,7 +15,6 @@ export default function LoginForm({ navigation }:any) {
   const handleLogin = async () => {
     try {
       const response = await auth().signInWithEmailAndPassword(email, password);
-      console.log('User logged in:', response.user.uid);
     } catch (e: any) {
       let errorString: string = e.toString();
       if (errorString.includes('email') || ( errorString.includes('user') && !errorString.includes('password'))) {
