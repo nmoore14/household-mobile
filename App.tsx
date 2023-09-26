@@ -41,11 +41,11 @@ export default function App() {
     return subscriber;
   }, [])
 
-  if (!user) {
-    return (
-      <LoginScreen />
-    )
-  }
+  // if (!user) {
+  //   return (
+  //     <LoginScreen />
+  //   )
+  // }
 
   if (!fontsLoaded) {
     return null;
@@ -76,6 +76,7 @@ export default function App() {
             tabBarIcon: ({ focused, color, size }) => (
               <Ionicons name={ focused ? 'ios-home' : 'ios-home-outline' } size={ size } color={ color } />
             ),
+            headerShown: false,
           }}
         />
         <Tab.Screen
