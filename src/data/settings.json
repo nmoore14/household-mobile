@@ -1,0 +1,23 @@
+{
+  "sections": [
+    {
+      "name": "Appearance",
+      "sectionSettings": [
+        {
+          "name": "Dark Mode",
+          "type": "switch",
+          "default": false
+        }
+      ]
+    },
+    {
+      "name": "Account",
+      "sectionSettings": [
+        {
+          "name": "Log Out",
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}

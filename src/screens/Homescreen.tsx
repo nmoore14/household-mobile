@@ -9,6 +9,9 @@ export default function HomeScreen() {
           Welcome
         </Text>
       </View>
+      <View style={ styles.dashboard }>
+
+      </View>
     </View>
   )
 }
@@ -36,4 +39,5 @@ const styles = StyleSheet.create({
     fontSize: 45,
     textAlign: 'left',
   },
+  dashboard: {},
 })

@@ -23,7 +23,7 @@ export default function App() {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
   const [fontsLoaded, setFontsLoaded] = useState(false);
-  
+
   const _loadFontsAsync = async () => {
     await Font.loadAsync(customFonts);
     setFontsLoaded(true);
@@ -60,17 +60,17 @@ export default function App() {
           tabBarInactiveColor: 'gray',
         })}
       >
-        <Tab.Screen 
-          name='Schedule' 
-          component={ ScheduleScreen } 
+        <Tab.Screen
+          name='Schedule'
+          component={ ScheduleScreen }
           options={{
             tabBarIcon: ({ focused, color, size }) => (
               <Ionicons name={ focused ? 'ios-calendar' : 'ios-calendar-outline' } size={ size } color={ color } />
             ),
           }}
         />
-        <Tab.Screen 
-          name='House' 
+        <Tab.Screen
+          name='House'
           component={ HomeScreen }
           options={{
             tabBarIcon: ({ focused, color, size }) => (
@@ -80,21 +80,22 @@ export default function App() {
           }}
         />
         <Tab.Screen
-          name='Members' 
-          component={ MembersScreen } 
+          name='Members'
+          component={ MembersScreen }
           options={{
             tabBarIcon: ({ focused, color, size }) => (
               <MaterialCommunityIcons name={ focused ? 'account-group' : 'account-group-outline' } size={ size } color={ color } />
             ),
           }}
         />
-        <Tab.Screen 
-          name='Settings' 
-          component={ SettingsScreen } 
+        <Tab.Screen
+          name='Settings'
+          component={ SettingsScreen }
           options={{
             tabBarIcon: ({ focused, color, size }) => (
               <Ionicons name={ focused ? 'ios-settings' : 'ios-settings-outline' } size={ size } color={ color } />
             ),
+            headerShown: false,
           }}
         />
       </Tab.Navigator>
